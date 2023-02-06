@@ -3,10 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/shreeya/cms/src/javastdapp/LoginForm.java</file>
-            <file>file:/home/shreeya/cms/src/javastdapp/MyConnection.java</file>
+            <file>file:/home/shreeya/cms/src/javastdapp/Admincourse.java</file>
+            <file>file:/home/shreeya/cms/src/javastdapp/Instructor.java</file>
+            <file>file:/home/shreeya/cms/src/javastdapp/module.java</file>
             <file>file:/home/shreeya/cms/src/javastdapp/Register.java</file>
-            <file>file:/home/shreeya/cms/src/javastdapp/Login.java</file>
+            <file>file:/home/shreeya/cms/src/javastdapp/AdminInstructor.java</file>
+            <file>file:/home/shreeya/cms/src/javastdapp/addStudent.java</file>
+            <file>file:/home/shreeya/cms/src/javastdapp/course.java</file>
+            <file>file:/home/shreeya/cms/src/javastdapp/addModuleForm.java</file>
+            <file>file:/home/shreeya/cms/src/javastdapp/addCourceForm.java</file>
+            <file>file:/home/shreeya/cms/src/javastdapp/addInstructor.java</file>
+            <file>file:/home/shreeya/cms/src/javastdapp/LoginForm.java</file>
+            <file>file:/home/shreeya/cms/src/javastdapp/Adminstudent.java</file>
+            <file>file:/home/shreeya/cms/src/javastdapp/MyConnection.java</file>
+            <file>file:/home/shreeya/cms/src/javastdapp/Admin.java</file>
+            <file>file:/home/shreeya/cms/src/javastdapp/Adminmodule.java</file>
+            <file>file:/home/shreeya/cms/src/javastdapp/students.java</file>
         </group>
     </open-files>
 </project-private>

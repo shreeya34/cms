@@ -22,7 +22,7 @@ public class addScoreForm extends javax.swing.JFrame {
      * Creates new form addScoreForm
      */
      course c = new course();
-     student std = new student();
+     students std = new student();
      Score sc = new Score();
      DefaultTableModel model;
     public addScoreForm() {
@@ -71,18 +71,16 @@ public class addScoreForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(115, 210, 22));
-
         jLabel1.setFont(new java.awt.Font("Courier New", 1, 30)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 51, 51));
         jLabel1.setText("Add Score");
 
         jLabel4.setFont(new java.awt.Font("Courier New", 1, 15)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setForeground(new java.awt.Color(0, 51, 51));
         jLabel4.setText("Descrption:");
 
         jLabel5.setFont(new java.awt.Font("Courier New", 1, 15)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setForeground(new java.awt.Color(0, 51, 51));
         jLabel5.setText("Student Id:");
 
         jTextField_std_Id.setEditable(false);
@@ -94,7 +92,7 @@ public class addScoreForm extends javax.swing.JFrame {
         });
 
         button_Cancel.setBackground(new java.awt.Color(102, 102, 102));
-        button_Cancel.setFont(new java.awt.Font("Calibri", 1, 16)); // NOI18N
+        button_Cancel.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
         button_Cancel.setForeground(new java.awt.Color(255, 255, 255));
         button_Cancel.setLabel("Cancel");
         button_Cancel.addActionListener(new java.awt.event.ActionListener() {
@@ -104,7 +102,7 @@ public class addScoreForm extends javax.swing.JFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Courier New", 1, 15)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setForeground(new java.awt.Color(0, 51, 51));
         jLabel6.setText("Course Id:");
 
         jTextField_Score.setFont(new java.awt.Font("Comic Sans MS", 2, 18)); // NOI18N
@@ -115,7 +113,7 @@ public class addScoreForm extends javax.swing.JFrame {
         });
 
         button_AddScore.setBackground(new java.awt.Color(102, 102, 102));
-        button_AddScore.setFont(new java.awt.Font("Calibri", 1, 16)); // NOI18N
+        button_AddScore.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
         button_AddScore.setForeground(new java.awt.Color(255, 255, 255));
         button_AddScore.setLabel("Add New Score");
         button_AddScore.addActionListener(new java.awt.event.ActionListener() {
@@ -147,7 +145,7 @@ public class addScoreForm extends javax.swing.JFrame {
         jComboBox_course_id.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Courier New", 1, 15)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setForeground(new java.awt.Color(0, 51, 51));
         jLabel7.setText("Score:");
 
         jTextField_decription.setFont(new java.awt.Font("Comic Sans MS", 2, 18)); // NOI18N
@@ -165,10 +163,12 @@ public class addScoreForm extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -188,11 +188,6 @@ public class addScoreForm extends javax.swing.JFrame {
                         .addGap(308, 308, 308)
                         .addComponent(jLabel1)))
                 .addContainerGap(18, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(52, 52, 52)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(614, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,7 +205,9 @@ public class addScoreForm extends javax.swing.JFrame {
                             .addComponent(jComboBox_course_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField_Score, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField_Score, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField_decription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -220,12 +217,7 @@ public class addScoreForm extends javax.swing.JFrame {
                             .addComponent(button_AddScore, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(button_Cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(206, 206, 206)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(288, Short.MAX_VALUE)))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class course {
        public void insertUpdateDeleteCourse(char operation, Integer id, String course_name, 
-            Integer batch, Integer seats, Integer noofyear){
+            Integer batch, Integer seats, Integer noofyear, Integer hours){
          
          Connection con = MyConnection.getConnection();
             PreparedStatement ps;
@@ -26,11 +26,12 @@ public class course {
         { 
             try 
                {
-                   ps = con.prepareStatement("INSERT INTO course(course_name,batch,seats,noofyear) VALUES (?,?)");
+                   ps = con.prepareStatement("INSERT INTO course(name,batch,seats,years,hours) VALUES (?,?,?,?,?)");
                    ps.setString(1, course_name);
                    ps.setInt(2, batch);
                    ps.setInt(3,seats);
                    ps.setInt(4,noofyear);
+                   ps.setInt(5,hours);
                  
                    
                     if(ps.executeUpdate() > 0){
@@ -48,7 +49,7 @@ public class course {
         { 
             try 
                {
-                   ps = con.prepareStatement("UPDATE `course` SET `course_name`= ?,`batch`= ?,`seat`=?, `noofyear`=? WHERE `id` = ?");
+                   ps = con.prepareStatement("UPDATE `course` SET `name`= ?,`batch`= ?,`seat`=?, `years`=? WHERE `id` = ?");
                    ps.setString(1, course_name);
                    ps.setInt(2, batch);
                    ps.setInt(3, seats);
@@ -82,7 +83,7 @@ public class course {
                 } 
             catch (SQLException ex) 
                 {
-                     Logger.getLogger(student.class.getName()).log(Level.SEVERE,null,ex);
+                     Logger.getLogger(course.class.getName()).log(Level.SEVERE,null,ex);
                 }
         
              }
@@ -92,11 +93,11 @@ public class course {
     }
       
        public boolean isCourseExist(String courseName){
-           boolean isExist= false;
-             Connection con = MyConnection.getConnection();
-            PreparedStatement ps;
+          boolean isExist= false;
+          Connection con = MyConnection.getConnection();
+          PreparedStatement ps;
          try{
-           ps = con.prepareStatement("SELECT * FROM `course` WHERE `course_name` = ?");
+           ps = con.prepareStatement("SELECT * FROM `course` WHERE `name` = ?");
            ps.setString(1,courseName);
            ResultSet rs =ps.executeQuery();        
          
@@ -111,16 +112,16 @@ public class course {
        
        }
        
-        public void Fill_Course_Table(JTable table){
-         Connection con = MyConnection.getConnection();
-            PreparedStatement ps;
-         try{
-           ps = con.prepareStatement("SELECT * FROM `course`");
-           ResultSet rs =ps.executeQuery();        
-           DefaultTableModel model =(DefaultTableModel) table.getModel();
-           Object[] row;
-           while(rs.next())
-                {
+      public void Fill_Course_Table(JTable table){
+        Connection con = MyConnection.getConnection();
+          PreparedStatement ps;
+        try{
+          ps = con.prepareStatement("SELECT * FROM `course`");
+          ResultSet rs =ps.executeQuery();        
+          DefaultTableModel model =(DefaultTableModel) table.getModel();
+          Object[] row;
+          while(rs.next())
+              {
                 row = new Object[3];
                 row[0] = rs.getInt(1);
                 row[1] = rs.getString(2);
@@ -128,46 +129,46 @@ public class course {
                 row[3] = rs.getInt(4);
                 row[4] = rs.getInt(5);
                 model.addRow(row);
-                }
-            } catch (SQLException ex) {
-              Logger.getLogger(course.class.getName()).log(Level.SEVERE, null, ex);
-          }
-      }
-        
-        public int getCourseId(String course_name)
-        {
-           int courseid =0;
-           Connection con = MyConnection.getConnection();
-            PreparedStatement ps;
-         try{
-           ps = con.prepareStatement("SELECT * FROM `course` WHERE `course_name` = ?");
-           ps.setString(1,course_name);
-           ResultSet rs =ps.executeQuery();        
-         
-           if(rs.next())
-                {
-               courseid = rs.getInt("Id");
-                }
-            } catch (SQLException ex) {
-              Logger.getLogger(course.class.getName()).log(Level.SEVERE, null, ex);
-          }
-           return courseid;
-        
+              }
+          } catch (SQLException ex) {
+            Logger.getLogger(course.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }
-        
-        
-        public void Fill_Course_combo(JComboBox combo){
-         Connection con = MyConnection.getConnection();
-            PreparedStatement ps;
-         try{
-           ps = con.prepareStatement("SELECT * FROM `course`");
-           ResultSet rs = ps.executeQuery();                
-           while(rs.next())
-                {
-               combo.addItem(rs.getString(2));
-                }
-            } catch (SQLException ex){
-              Logger.getLogger(course.class.getName()).log(Level.SEVERE, null, ex);
-          }
       }
+        
+      public int getCourseId(String course_name)
+      {
+          int courseid =0;
+          Connection con = MyConnection.getConnection();
+          PreparedStatement ps;
+        try{
+          ps = con.prepareStatement("SELECT * FROM `course` WHERE `name` = ?");
+          ps.setString(1,course_name);
+          ResultSet rs =ps.executeQuery();        
+        
+          if(rs.next())
+              {
+              courseid = rs.getInt("Id");
+              }
+          } catch (SQLException ex) {
+            Logger.getLogger(course.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          return courseid;
+      
+      }
+        
+        
+      public void Fill_Course_combo(JComboBox combo){
+        Connection con = MyConnection.getConnection();
+          PreparedStatement ps;
+        try{
+          ps = con.prepareStatement("SELECT * FROM `course`");
+          ResultSet rs = ps.executeQuery();                
+          while(rs.next())
+              {
+              combo.addItem(rs.getString(2));
+              }
+          } catch (SQLException ex){
+            Logger.getLogger(course.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

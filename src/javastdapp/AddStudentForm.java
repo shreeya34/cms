@@ -45,12 +45,10 @@ public class AddStudentForm extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jTextField_Phone = new javax.swing.JTextField();
         jTextField_Fname = new javax.swing.JTextField();
         jRadioButton_male = new javax.swing.JRadioButton();
         jRadioButton_female = new javax.swing.JRadioButton();
-        jTextField_Faculity = new javax.swing.JTextField();
         jTextField_Lname = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea_txtarea = new javax.swing.JTextArea();
@@ -62,8 +60,6 @@ public class AddStudentForm extends javax.swing.JFrame {
         jLabel3.setText("First Name:");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setBackground(new java.awt.Color(115, 220, 22));
 
         jLabel1.setFont(new java.awt.Font("Courier New", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -81,8 +77,6 @@ public class AddStudentForm extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Phone:");
 
-       
-
         jLabel7.setFont(new java.awt.Font("Courier New", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Address:");
@@ -90,12 +84,6 @@ public class AddStudentForm extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Courier New", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Last Name:");
-
-        jLabel9.setFont(new java.awt.Font("Courier New", 1, 12)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Faculity:");
-
-
 
         jTextField_Phone.setFont(new java.awt.Font("Comic Sans MS", 2, 18)); // NOI18N
         jTextField_Phone.addActionListener(new java.awt.event.ActionListener() {
@@ -133,13 +121,6 @@ public class AddStudentForm extends javax.swing.JFrame {
         jTextField_Lname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField_LnameActionPerformed(evt);
-            }
-        });
-
-        jTextField_Faculity.setFont(new java.awt.Font("Comic Sans MS", 2, 18)); // NOI18N
-        jTextField_Faculity.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_FaculityActionPerformed(evt);
             }
         });
 
@@ -203,7 +184,6 @@ public class AddStudentForm extends javax.swing.JFrame {
                             .addComponent(jTextField_Lname)
                             .addComponent(jTextField_Fname)
                             .addComponent(jTextField_Phone)
-                            .addComponent(jTextField_Faculity)
                             .addComponent(jScrollPane1)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(131, 131, 131)
@@ -377,7 +357,6 @@ public class AddStudentForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRadioButton_female;
     private javax.swing.JRadioButton jRadioButton_male;
@@ -386,6 +365,5 @@ public class AddStudentForm extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField_Fname;
     private javax.swing.JTextField jTextField_Lname;
     private javax.swing.JTextField jTextField_Phone;
-    private javax.swing.JTextField jTextField_Faculity;
     // End of variables declaration//GEN-END:variables
 }

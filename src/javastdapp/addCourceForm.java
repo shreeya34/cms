@@ -2,6 +2,8 @@
 package javastdapp;
 
 import static javastdapp.manageCourseForm.jTable1;
+
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -31,7 +33,6 @@ public class addCourceForm extends javax.swing.JFrame {
         jTextField_Fname = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        // jLabel6 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jTextField_CourseLabel = new javax.swing.JTextField();
@@ -48,25 +49,17 @@ public class addCourceForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(115, 210, 22));
-
-        jLabel1.setFont(new java.awt.Font("Courier New", 1, 30)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Courier New", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 51, 51));
         jLabel1.setText("Add Courses");
 
-        // jLabel6.setFont(new java.awt.Font("Courier New", 1, 15)); // NOI18N
-        // jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        // jLabel6.setText("Course_id:");
-
         jLabel4.setFont(new java.awt.Font("Courier New", 1, 15)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Hours:");
+        jLabel4.setForeground(new java.awt.Color(0, 51, 51));
+        jLabel4.setText("Credits Hours:");
 
         jLabel5.setFont(new java.awt.Font("Courier New", 1, 15)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("course_name:");
-
-
+        jLabel5.setForeground(new java.awt.Color(0, 51, 51));
+        jLabel5.setText("Name:");
 
         jTextField_CourseLabel.setFont(new java.awt.Font("Comic Sans MS", 2, 18)); // NOI18N
         jTextField_CourseLabel.addActionListener(new java.awt.event.ActionListener() {
@@ -79,7 +72,7 @@ public class addCourceForm extends javax.swing.JFrame {
         jSpinner_courseHours.setModel(new javax.swing.SpinnerNumberModel(0, 0, 8, 1));
 
         button_AddCourses.setBackground(new java.awt.Color(102, 102, 102));
-        button_AddCourses.setFont(new java.awt.Font("Calibri", 1, 16)); // NOI18N
+        button_AddCourses.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
         button_AddCourses.setForeground(new java.awt.Color(255, 255, 255));
         button_AddCourses.setLabel("Add Course");
         button_AddCourses.addActionListener(new java.awt.event.ActionListener() {
@@ -89,7 +82,7 @@ public class addCourceForm extends javax.swing.JFrame {
         });
 
         button_Cancel.setBackground(new java.awt.Color(102, 102, 102));
-        button_Cancel.setFont(new java.awt.Font("Calibri", 1, 16)); // NOI18N
+        button_Cancel.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
         button_Cancel.setForeground(new java.awt.Color(255, 255, 255));
         button_Cancel.setLabel("Cancel");
         button_Cancel.addActionListener(new java.awt.event.ActionListener() {
@@ -104,22 +97,21 @@ public class addCourceForm extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    // .addComponent(jLabel6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
-                .addGap(1, 1, 1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(button_AddCourses, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGap(1, 1, 1)
-                            .addComponent(button_Cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSpinner_courseHours, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField_CourseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(78, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(button_AddCourses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(button_Cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSpinner_courseHours, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(jLabel1))
+                    .addComponent(jTextField_CourseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,28 +151,29 @@ public class addCourceForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_FnameActionPerformed
 
-    private void jTextField_CourseLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_CourseLabelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_CourseLabelActionPerformed
-
     private void button_AddCoursesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_AddCoursesActionPerformed
          if(!crs.isCourseExist(jTextField_CourseLabel.getText())){
-        String label = jTextField_CourseLabel.getText();
-        int hours = Integer.valueOf(jSpinner_courseHours.getValue().toString());
-        crs.insertUpdateDeleteCourse('i', null, label, hours);
-//        MainForm.jLabel_cocount.setText("courses count = "+Integer.toString(MyFunction.countData("course")));
-             try {
-                  manageCourseForm.jTable1.setModel(new DefaultTableModel(null,new Object[]{"Id","Label","Hours"}));
-        crs.Fill_Course_Table(manageCourseForm.jTable1);
-             } catch (Exception e) {
-                 System.out.println(e.getMessage());
-             }
+            String label = jTextField_CourseLabel.getText();
+            int hours = Integer.valueOf(jSpinner_courseHours.getValue().toString());
+            crs.insertUpdateDeleteCourse('i', null, label, 2019,100,2,hours);
+            try {
+                Admincourse asc = new Admincourse();
+                asc.setVisible(true);
+                asc.pack();
+                asc.setLocationRelativeTo(null);
+                asc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                this.dispose();
+                // manageCourseForm.jTable1.setModel(new DefaultTableModel(null,new Object[]{"Id","Label","Hours"}));
+                // crs.Fill_Course_Table(manageCourseForm.jTable1);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
        
          }else{
              JOptionPane.showMessageDialog(null, "Course Already Exists");
               }
     }//GEN-LAST:event_button_AddCoursesActionPerformed
-
+    
     private void button_CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_CancelActionPerformed
             this.dispose();
 //        if(jTextField_std_id.getText().equals("")){
@@ -201,6 +194,10 @@ public class addCourceForm extends javax.swing.JFrame {
 //            jRadioButton_male.setSelected(false);
 //        }
     }//GEN-LAST:event_button_CancelActionPerformed
+
+    private void jTextField_CourseLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_CourseLabelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_CourseLabelActionPerformed
 
     /**
      * @param args the command line arguments

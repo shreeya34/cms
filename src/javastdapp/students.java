@@ -13,8 +13,8 @@ public class students extends javax.swing.JFrame {
     /**
      * Creates new form student
      */
-    public students() {
-        initComponents();
+    public students(String username) {
+        initComponents(username);
     }
 
     /**
@@ -24,7 +24,7 @@ public class students extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(String username) {
 
         jFrame1 = new javax.swing.JFrame();
         jFrame2 = new javax.swing.JFrame();
@@ -102,7 +102,9 @@ public class students extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
-        jLabel1.setText("HELLO STUDENT!");
+        String greeting_message = String.format("HELLO %s!", username);
+        jLabel1.setText(greeting_message);
+
 
         jLabel2.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel2.setText("Course List:");
@@ -349,8 +351,10 @@ public class students extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            
             public void run() {
-                new students().setVisible(true);
+                String username = "";
+                new students(username).setVisible(true);
             }
         });
     }
@@ -384,5 +388,6 @@ public class students extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private java.awt.TextArea textArea1;
+ 
     // End of variables declaration//GEN-END:variables
 }
