@@ -276,6 +276,7 @@ public class AddStudentForm extends javax.swing.JFrame {
         String lname = jTextField_Lname.getText();
         String phone = jTextField_Phone.getText();
         String address = jTextArea_txtarea.getText();
+        string course = 
         
         String sex = "Male";
         if (jRadioButton_female.isSelected()) {
@@ -283,9 +284,9 @@ public class AddStudentForm extends javax.swing.JFrame {
         }
         if(verifText()){
         student std = new student();
-        std.insertUpdateDeleteStudent('i', null, fname, lname, sex, phone, address);
+        std.insertUpdateDeleteStudent('i', null, fname, lname, sex, phone, address,course);
         try{
-              manageSTD.jTable1.setModel(new DefaultTableModel(null,new Object[]{"Id","First Name","Last Name","Sex","Phone","Address"}));       
+              manageSTD.jTable1.setModel(new DefaultTableModel(null,new Object[]{"Id","First Name","Last Name","Sex","Phone","Address","course"}));       
              std.Fill_Student_Table(manageSTD.jTable1, "");
         }catch(Exception ex)
         {

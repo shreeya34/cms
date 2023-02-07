@@ -71,30 +71,28 @@ public class manageSTD extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
-
         jLabel1.setFont(new java.awt.Font("Courier New", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 51, 51));
         jLabel1.setText("Manage Students");
 
         jLabel2.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(0, 51, 51));
         jLabel2.setText("Enter value to search:");
 
         jLabel4.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setForeground(new java.awt.Color(0, 51, 51));
         jLabel4.setText("Sex:");
 
         jLabel6.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setForeground(new java.awt.Color(0, 51, 51));
         jLabel6.setText("Phone:");
 
         jLabel7.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setForeground(new java.awt.Color(0, 51, 51));
         jLabel7.setText("Address:");
 
         jLabel8.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setForeground(new java.awt.Color(0, 51, 51));
         jLabel8.setText("Last Name:");
 
         jTextField_Phone.setFont(new java.awt.Font("Comic Sans MS", 2, 18)); // NOI18N
@@ -116,12 +114,10 @@ public class manageSTD extends javax.swing.JFrame {
             }
         });
 
-        jRadioButton_male.setBackground(new java.awt.Color(0, 153, 153));
-        jRadioButton_male.setForeground(new java.awt.Color(255, 255, 255));
+        jRadioButton_male.setForeground(new java.awt.Color(0, 51, 51));
         jRadioButton_male.setText("Male");
 
-        jRadioButton_female.setBackground(new java.awt.Color(0, 153, 153));
-        jRadioButton_female.setForeground(new java.awt.Color(255, 255, 255));
+        jRadioButton_female.setForeground(new java.awt.Color(0, 51, 51));
         jRadioButton_female.setText("Female");
         jRadioButton_female.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,7 +158,7 @@ public class manageSTD extends javax.swing.JFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setForeground(new java.awt.Color(0, 51, 51));
         jLabel3.setText("First Name:");
 
         jTextField_std_id.setFont(new java.awt.Font("Comic Sans MS", 2, 18)); // NOI18N
@@ -221,7 +217,7 @@ public class manageSTD extends javax.swing.JFrame {
         });
 
         jLabel5.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setForeground(new java.awt.Color(0, 51, 51));
         jLabel5.setText("Id:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

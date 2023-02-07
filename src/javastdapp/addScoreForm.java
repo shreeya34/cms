@@ -22,7 +22,7 @@ public class addScoreForm extends javax.swing.JFrame {
      * Creates new form addScoreForm
      */
      course c = new course();
-     students std = new student();
+     students std = new students(getTitle());
      Score sc = new Score();
      DefaultTableModel model;
     public addScoreForm() {
@@ -58,7 +58,6 @@ public class addScoreForm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField_std_Id = new javax.swing.JTextField();
         button_Cancel = new java.awt.Button();
         jLabel6 = new javax.swing.JLabel();
         jTextField_Score = new javax.swing.JTextField();
@@ -68,6 +67,7 @@ public class addScoreForm extends javax.swing.JFrame {
         jComboBox_course_id = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         jTextField_decription = new javax.swing.JTextField();
+        jTextField_id = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,14 +83,6 @@ public class addScoreForm extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(0, 51, 51));
         jLabel5.setText("Student Id:");
 
-        jTextField_std_Id.setEditable(false);
-        jTextField_std_Id.setFont(new java.awt.Font("Comic Sans MS", 2, 18)); // NOI18N
-        jTextField_std_Id.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_std_IdActionPerformed(evt);
-            }
-        });
-
         button_Cancel.setBackground(new java.awt.Color(102, 102, 102));
         button_Cancel.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
         button_Cancel.setForeground(new java.awt.Color(255, 255, 255));
@@ -105,7 +97,7 @@ public class addScoreForm extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(0, 51, 51));
         jLabel6.setText("Course Id:");
 
-        jTextField_Score.setFont(new java.awt.Font("Comic Sans MS", 2, 18)); // NOI18N
+        jTextField_Score.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
         jTextField_Score.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField_ScoreActionPerformed(evt);
@@ -148,10 +140,16 @@ public class addScoreForm extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(0, 51, 51));
         jLabel7.setText("Score:");
 
-        jTextField_decription.setFont(new java.awt.Font("Comic Sans MS", 2, 18)); // NOI18N
+        jTextField_decription.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
         jTextField_decription.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField_decriptionActionPerformed(evt);
+            }
+        });
+
+        jTextField_id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_idActionPerformed(evt);
             }
         });
 
@@ -178,11 +176,11 @@ public class addScoreForm extends javax.swing.JFrame {
                                 .addGap(19, 19, 19))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField_decription, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox_course_id, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField_std_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField_Score, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(1, 1, 1)))
+                                    .addComponent(jTextField_decription, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                                    .addComponent(jComboBox_course_id, 0, 184, Short.MAX_VALUE)
+                                    .addComponent(jTextField_Score, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                                    .addComponent(jTextField_id))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(308, 308, 308)
@@ -198,8 +196,8 @@ public class addScoreForm extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField_std_Id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jComboBox_course_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -234,10 +232,6 @@ public class addScoreForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField_std_IdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_std_IdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_std_IdActionPerformed
-
     private void button_CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_CancelActionPerformed
                 this.dispose();
 //        if(!jTextField_std_Id.getText().equals("")){
@@ -256,7 +250,7 @@ public class addScoreForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField_ScoreActionPerformed
        public boolean verifText()
      {
-         if(jTextField_std_Id.getText().equals("") || jTextField_Score.getText().equals("") || 
+         if(jTextField_id.getText().equals("") || jTextField_Score.getText().equals("") || 
           jTextField_decription.getText().equals(""))
              { JOptionPane.showMessageDialog(null, "One Or More Empty Field"); return false;  }
          else{return true;}
@@ -264,7 +258,7 @@ public class addScoreForm extends javax.swing.JFrame {
      }
     private void button_AddScoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_AddScoreActionPerformed
          if(verifText()){
-        int stdId = Integer.valueOf(jTextField_std_Id.getText());
+        int stdId = Integer.valueOf(jTextField_id.getText());
          int csdId = c.getCourseId(jComboBox_course_id.getSelectedItem().toString());
          double scr = Double.valueOf(jTextField_Score.getText());
         
@@ -282,7 +276,7 @@ public class addScoreForm extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
               int rowIndex = jTable1.getSelectedRow();
-              jTextField_std_Id.setText(model.getValueAt(rowIndex, 0).toString());
+              jTextField_id.setText(model.getValueAt(rowIndex, 0).toString());
 
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -294,6 +288,10 @@ public class addScoreForm extends javax.swing.JFrame {
     private void jTextField_decriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_decriptionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_decriptionActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -344,6 +342,6 @@ public class addScoreForm extends javax.swing.JFrame {
     public static javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField_Score;
     private javax.swing.JTextField jTextField_decription;
-    private javax.swing.JTextField jTextField_std_Id;
+    private javax.swing.JTextField jTextField_id;
     // End of variables declaration//GEN-END:variables
 }

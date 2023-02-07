@@ -11,8 +11,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class student {
-    public void insertUpdateDeleteCourse(char operation, Integer id, String student_name, 
-            Integer phonenumber, Integer age, String course_name){
+    public void insertUpdateDeletestudent(char operation, Integer id, String name, String course_name,
+            String phonenumber, String age){
          
          Connection con = MyConnection.getConnection();
             PreparedStatement ps;
@@ -20,11 +20,13 @@ public class student {
         { 
             try 
                {
-                   ps = con.prepareStatement("INSERT INTO student(student_name,phonenumber,age,course_name) VALUES (?,?,?)");
-                   ps.setString(1, student_name);
-                   ps.setInt(2, phonenumber);
-                   ps.setInt(3,age);
+                   ps = con.prepareStatement("INSERT INTO students(`id`, `name`, `course_name`, `age`, `phonenumber`) VALUES (?,?,?,?,?)");
+                   ps.setString(1, name);
                    ps.setString(4,course_name);
+                   ps.setString(3,age);
+                   ps.setString(2, phonenumber);
+                   
+                   
                    
                     if(ps.executeUpdate() > 0){
                        JOptionPane.showMessageDialog(null, "New student Added");
@@ -41,11 +43,12 @@ public class student {
         { 
             try 
                {
-                   ps = con.prepareStatement("UPDATE `student` SET `student_name`= ?,`phonenumber`= ?,`age`=?,`course_name`=? WHERE `id` = ?");
-                   ps.setString(1, student_name);
-                   ps.setInt(2, phonenumber);
-                   ps.setInt(3, age);
-                   ps.setString(4, course_name);
+                   ps = con.prepareStatement("UPDATE `students` SET `name`= ?,`course_name`=?,`age`=?,`phonenumber`= ? WHERE `id` = ?");
+                   ps.setString(1,name);
+                   ps.setString(2, course_name);
+                   ps.setString(3, age);
+                   ps.setString(4, phonenumber);
+                  
                   
                    
                     if(ps.executeUpdate() > 0){
@@ -66,7 +69,7 @@ public class student {
              {
                 try 
                {
-                   ps = con.prepareStatement("DELETE FROM `student` WHERE `id`= ?");
+                   ps = con.prepareStatement("DELETE FROM `students` WHERE `id`= ?");
                    ps.setInt(1, id);
                    
                     if(ps.executeUpdate() > 0){
@@ -84,12 +87,12 @@ public class student {
     
     }
       
-       public boolean isCourseExist(String studentName){
+       public boolean isstudentExist(String studentName){
           boolean isExist= false;
           Connection con = MyConnection.getConnection();
           PreparedStatement ps;
          try{
-           ps = con.prepareStatement("SELECT * FROM `student` WHERE `name` = ?");
+           ps = con.prepareStatement("SELECT * FROM `students` WHERE `name` = ?");
            ps.setString(1, studentName);
            ResultSet rs =ps.executeQuery();        
          
@@ -108,7 +111,7 @@ public class student {
         Connection con = MyConnection.getConnection();
           PreparedStatement ps;
         try{
-          ps = con.prepareStatement("SELECT * FROM `student`");
+          ps = con.prepareStatement("SELECT * FROM `students`");
           ResultSet rs =ps.executeQuery();        
           DefaultTableModel model =(DefaultTableModel) table.getModel();
           Object[] row;
@@ -133,7 +136,7 @@ public class student {
           Connection con = MyConnection.getConnection();
           PreparedStatement ps;
         try{
-          ps = con.prepareStatement("SELECT * FROM `student` WHERE `name` = ?");
+          ps = con.prepareStatement("SELECT * FROM `students` WHERE `name` = ?");
           ps.setString(1,student_name);
           ResultSet rs =ps.executeQuery();        
         

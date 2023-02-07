@@ -43,11 +43,9 @@ public class showScoreForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel3.setBackground(new java.awt.Color(0, 153, 153));
-
         jLabel3.setFont(new java.awt.Font("Courier New", 1, 30)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("All Scores");
+        jLabel3.setForeground(new java.awt.Color(0, 51, 51));
+        jLabel3.setText("All Marks");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
