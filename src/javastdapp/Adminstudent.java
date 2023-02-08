@@ -136,7 +136,7 @@ public class Adminstudent extends javax.swing.JFrame {
         Connection con = MyConnection.getConnection();
         PreparedStatement ps;
         DefaultTableModel model = new DefaultTableModel(null,new String [] {
-                    "S.N", "Student Name", "Course","Age","Phone","Email","Action"
+                    "S.N", "Student Name","Username", "Course","Phone","Email","Action"
                 });
         // jTable1.setModel(new javax.swing.table.DefaultTableModel(
         //     myData,
@@ -145,7 +145,7 @@ public class Adminstudent extends javax.swing.JFrame {
         //     }
         // ));
         try{
-          ps = con.prepareStatement("SELECT * FROM `students`");
+          ps = con.prepareStatement("SELECT * FROM `register` WHERE role='2'");
           ResultSet rs =ps.executeQuery();        
           Object[] row;
           int i =1;
@@ -153,11 +153,11 @@ public class Adminstudent extends javax.swing.JFrame {
               {
                 row = new Object[6];
                 row[0] = i;
-                row[1] = rs.getString(2);
-                row[2] = rs.getString(3);
-                row[3] = rs.getInt(4);
-                row[4] = rs.getInt(5);
-                row[5] = rs.getString(6);
+                row[1] = rs.getString(4).concat(" ").concat(rs.getString(5));
+                row[2] = rs.getString(2);
+                row[3] = rs.getInt(9);
+                row[4] = rs.getInt(6);
+                row[5] = rs.getString(8);
                 model.addRow(row);
                 i++;
               }

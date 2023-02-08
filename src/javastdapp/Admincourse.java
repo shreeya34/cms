@@ -22,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Admincourse extends javax.swing.JFrame {
 
+    private DefaultTableModel model;
     /**
      * Creates new form Admincourse
      */
@@ -44,34 +45,10 @@ public class Admincourse extends javax.swing.JFrame {
         jButton_addc = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        this.Fill_Course_Table();
-        // Object[] objArray = existing_data.toArray();
-        // Object [][]myData;
-        // if(objArray.length <= 0){
-        // //    data  = new Object [][]{
-        // //         {"No Course Added"}
-        // //     };  
-        // }else{
-        //     for(int i =0; i < objArray.length; i++){
-        //         myData[i] = objArray[i];
-        //     }
-            
-        // }
-        
-        // jTable1.setModel(new javax.swing.table.DefaultTableModel(
-        //     myData,
-        //     new String [] {
-        //         "S.N", "Course id", "Course name", "Action "
-        //     }
-        // ));
-        jTable1.setModel(this.model);
+
+        jTable1.setModel(this.Fill_Course_Table());
         jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setHeaderValue("S.N");
-            jTable1.getColumnModel().getColumn(1).setHeaderValue("Course id");
-            jTable1.getColumnModel().getColumn(2).setHeaderValue("Course name");
-            jTable1.getColumnModel().getColumn(3).setHeaderValue("Action ");
-        }
+       
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel1.setText("Welcome To Course Management");
@@ -160,10 +137,10 @@ public class Admincourse extends javax.swing.JFrame {
 
     
     
-    public void Fill_Course_Table(){
+    public DefaultTableModel Fill_Course_Table(){
         Connection con = MyConnection.getConnection();
         PreparedStatement ps;
-        this.model = new DefaultTableModel(null,new String [] {
+        DefaultTableModel model = new DefaultTableModel(null,new String [] {
                     "S.N", "Course name", "Seats","Batch","Years","Hours","Action"
                 });
         // jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -179,18 +156,20 @@ public class Admincourse extends javax.swing.JFrame {
           int i =1;
           while(rs.next())
               {
-                row = new Object[5];
+                row = new Object[50];
                 row[0] = i;
                 row[1] = rs.getString(2);
                 row[2] = rs.getInt(3);
                 row[3] = rs.getInt(4);
                 row[4] = rs.getInt(5);
-                this.model.addRow(row);
+                row[5] = rs.getInt(6);
+                model.addRow(row);
                 i++;
               }
           } catch (SQLException ex) {
                 Logger.getLogger(course.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }
+        return model;
       }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -198,6 +177,5 @@ public class Admincourse extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private DefaultTableModel model;
     // End of variables declaration//GEN-END:variables
 }

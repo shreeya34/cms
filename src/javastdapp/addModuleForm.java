@@ -152,7 +152,12 @@ public class addModuleForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_addModuleActionPerformed
 
     private void jButton_cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_cancelActionPerformed
-        // TODO add your handling code here:
+                Admin asc = new Admin();
+                asc.setVisible(true);
+                asc.pack();
+                asc.setLocationRelativeTo(null);
+                asc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                this.dispose();
     }//GEN-LAST:event_jButton_cancelActionPerformed
 
     private void jComboBox_coursenameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_coursenameActionPerformed

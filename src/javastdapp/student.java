@@ -13,8 +13,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class student {
-    public void insertUpdateDeletestudent(char operation, Integer id, String name, String course_name,
-            String phonenumber, String age, String email){
+    public void insertUpdateDeletestudent(char operation, Integer id, String fname, String lname,
+            String uname, String pass, String email, Integer phone, String address, String course){
          
          Connection con = MyConnection.getConnection();
             PreparedStatement ps;
@@ -22,12 +22,16 @@ public class student {
         { 
             try 
                {
-                   ps = con.prepareStatement("INSERT INTO students(`name`, `course_name`, `age`, `phonenumber`,`email`) VALUES (?,?,?,?,?)");
-                   ps.setString(1, name);
-                   ps.setString(2,course_name);
-                   ps.setString(3,age);
-                   ps.setString(4, phonenumber);
-                   ps.setString(5,email);
+                   ps = con.prepareStatement("INSERT INTO register(`Username`, `Password`, `First name`, `Last name`, `Phone number`, `Address`, `Email`,`role`,`course`) VALUES (?,?,?,?,?,?,?,?,?)");
+                   ps.setString(1, uname);
+                   ps.setString(2,pass);
+                   ps.setString(3,fname);
+                   ps.setString(4, lname);
+                   ps.setInt(5,phone);
+                   ps.setString(6,address);
+                   ps.setString(7,email);
+                   ps.setString(8,"2");
+                   ps.setString(9,course);
                    
                    
                    
@@ -42,28 +46,28 @@ public class student {
         
         }
     
-        if(operation == 'u') //for update
-        { 
-            try 
-               {
-                   ps = con.prepareStatement("UPDATE `students` SET `name`= ?,`course_name`=?,`age`=?,`phonenumber`= ? WHERE `id` = ?");
-                   ps.setString(1,name);
-                   ps.setString(2, course_name);
-                   ps.setString(3, age);
-                   ps.setString(4, phonenumber);
+        // if(operation == 'u') //for update
+        // { 
+        //     try 
+        //        {
+        //            ps = con.prepareStatement("UPDATE `students` SET `name`= ?,`course_name`=?,`age`=?,`phonenumber`= ? WHERE `id` = ?");
+        //            ps.setString(1,name);
+        //            ps.setString(2, course_name);
+        //            ps.setString(3, age);
+        //            ps.setString(4, phonenumber);
                   
                   
                    
-                    if(ps.executeUpdate() > 0){
-                       JOptionPane.showMessageDialog(null, "student Data Updated");
-                     }
-                } 
-            catch (SQLException ex) 
-                {
-                     Logger.getLogger(course.class.getName()).log(Level.SEVERE,null,ex);
-                }
+        //             if(ps.executeUpdate() > 0){
+        //                JOptionPane.showMessageDialog(null, "student Data Updated");
+        //              }
+        //         } 
+        //     catch (SQLException ex) 
+        //         {
+        //              Logger.getLogger(course.class.getName()).log(Level.SEVERE,null,ex);
+        //         }
         
-        }
+        // }
         
          if(operation == 'd') //for delete
         { 
@@ -95,7 +99,7 @@ public class student {
           Connection con = MyConnection.getConnection();
           PreparedStatement ps;
          try{
-           ps = con.prepareStatement("SELECT * FROM `students` WHERE `email` = ?");
+           ps = con.prepareStatement("SELECT * FROM `register` WHERE `email` = ?");
            ps.setString(1, email);
            ResultSet rs =ps.executeQuery();        
          

@@ -6,7 +6,7 @@
 package javastdapp;
 
 import java.awt.Color;
-import static javastdapp.EditDeleteForm.jTable1;
+import static javastdapp.CourseEditDeleteForm.jTable1;
 import static javastdapp.manageSTD.jTable1;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -264,8 +264,8 @@ public class addScoreForm extends javax.swing.JFrame {
         
          sc.insertUpdateDeleteScore('i', stdId, csdId, scr,jTextField_decription.getText());
              try {
-                  EditDeleteForm.jTable1.setModel(new DefaultTableModel(null ,new Object[]{"Student Id","Course Id","Score","Description"}));
-             sc.Fill_Score_Table(EditDeleteForm.jTable1);
+                  CourseEditDeleteForm.jTable1.setModel(new DefaultTableModel(null ,new Object[]{"Student Id","Course Id","Score","Description"}));
+             sc.Fill_Score_Table(CourseEditDeleteForm.jTable1);
              } catch (Exception e) {
                  System.out.println(e.getMessage());
              }

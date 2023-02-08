@@ -6,7 +6,6 @@
 package javastdapp;
 
 import java.awt.Color;
-import static javastdapp.EditDeleteForm.jTable1;
 
 /**
  *
@@ -20,11 +19,7 @@ public class showScoreForm extends javax.swing.JFrame {
     Score sc = new Score();
     public showScoreForm() {
         initComponents();
-        sc.ShowAllScores(jTable1);
-         jTable1.setRowHeight(40);
-         jTable1.setShowGrid(true);
-         jTable1.setGridColor(Color.black);
-         jTable1.setSelectionBackground(Color.red);
+       
     }
 
     /**

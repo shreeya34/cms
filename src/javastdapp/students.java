@@ -4,8 +4,16 @@
  */
 package javastdapp;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.JFrame;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,8 +24,7 @@ public class students extends javax.swing.JFrame {
     /**
      * Creates new form student
      */
-    public students(String username) {
-        initComponents();
+    public students() {
     }
 
     /**
@@ -27,7 +34,7 @@ public class students extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    public void initComponents() {
 
         jFrame1 = new javax.swing.JFrame();
         jFrame2 = new javax.swing.JFrame();
@@ -39,6 +46,7 @@ public class students extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jButton_logout = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -87,22 +95,12 @@ public class students extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
-        jLabel1.setText("HELLO STUDENT!");
+        jLabel1.setText(String.format("HELLO  %s,", this.username));
 
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
-        jLabel3.setText("Choose course:");
+        jLabel3.setText("Following report were submitted by your instructor:");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Student ID", "Module name", "Course name"
-            }
-        ));
+        jTable2.setModel(this.fill_marks());
         jScrollPane2.setViewportView(jTable2);
 
         jButton_logout.setBackground(new java.awt.Color(204, 0, 0));
@@ -112,6 +110,9 @@ public class students extends javax.swing.JFrame {
                 jButton_logoutActionPerformed(evt);
             }
         });
+
+        jButton1.setBackground(new java.awt.Color(0, 153, 0));
+        jButton1.setText("View Report");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,7 +128,9 @@ public class students extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 262, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(70, 70, 70)
                         .addComponent(jButton_logout)
                         .addGap(54, 54, 54))))
         );
@@ -140,7 +143,9 @@ public class students extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
-                        .addComponent(jButton_logout)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton_logout)
+                            .addComponent(jButton1))))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
@@ -192,13 +197,13 @@ public class students extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             
             public void run() {
-                String username = "";
-                new students(username).setVisible(true);
+                new students().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton_logout;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
@@ -209,7 +214,55 @@ public class students extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
     private java.awt.TextArea textArea1;
+    private String username;
+    private Integer student_id;
     // End of variables declaration//GEN-END:variables
-    public void Fill_Student_Table(JTable jTable12, String string) {
+    public DefaultTableModel fill_marks(){
+        Connection con = MyConnection.getConnection();
+        PreparedStatement ps;
+        DefaultTableModel model = new DefaultTableModel(null,new String [] {
+                    "S.N", "Student Name", "Marks","Course","Module","Status"
+                });
+        String query = String.format("SELECT * FROM `marks` INNER JOIN register ON marks.student_id=register.id WHERE register.id=%d", this.getStudentId());
+        try{
+          ps = con.prepareStatement(query);
+          ResultSet rs =ps.executeQuery();        
+          Object[] row;
+          int i =1;
+          while(rs.next())
+              {
+                row = new Object[7];
+                row[0] = i;
+                row[1] = rs.getString(8);
+                row[2] = rs.getInt(5);
+                //row[3] = rs.getString(12); //email
+                row[3] = rs.getString(3);
+                row[4] = rs.getString(4);
+                row[5] = rs.getString(6);
+                model.addRow(row);
+                i++;
+              }
+          } catch (SQLException ex) {
+                Logger.getLogger(course.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+        }
+
+        return model;
+      }
+    public students setUsername(String username) {
+        this.username = username;
+        return this;
+    }
+
+    public String getUsername(){
+        return this.username;
+    }
+
+    public students setStudentId(Integer s_id) {
+        this.student_id = s_id;
+        return this;
+    }
+
+    public Integer getStudentId(){
+        return this.student_id;
     }
 }

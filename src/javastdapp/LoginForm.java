@@ -290,7 +290,8 @@ public class LoginForm extends javax.swing.JFrame {
                 // ps.setString(2,user.getMD5Hash(String.valueOf(jPasswordField_password.getPassword())));
                 ResultSet rs = ps.executeQuery();
                    if (rs.next()) {
-                    String username = rs.getString("Username");
+                    String username = rs.getString("First name");
+                    Integer s_id = rs.getInt("id");
                     //    MainForm mf = new MainForm();
                     if (role_m == "1"){  
                         Instructor in = new Instructor();
@@ -303,7 +304,10 @@ public class LoginForm extends javax.swing.JFrame {
 
                     }else if(role_m == "2"){
                         
-                        students in = new students(username);
+                        students in = new students();
+                        in.setUsername(username);
+                        in.setStudentId(s_id);
+                        in.initComponents();
                         in.setVisible(true);
                         in.pack();
                         in.setLocationRelativeTo(null);
@@ -340,7 +344,7 @@ public class LoginForm extends javax.swing.JFrame {
     private void button_registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_registerActionPerformed
         Register rgf = new Register();
         rgf.setVisible(true);
-        rgf.pack();
+        rgf.pack(); 
         rgf.setLocationRelativeTo(null);
         rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();

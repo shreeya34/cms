@@ -65,6 +65,7 @@ public class Instructor extends javax.swing.JFrame {
         jComboBox_status = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
         jComboBox1_course = new javax.swing.JComboBox<>();
+        jButton_logout = new javax.swing.JButton();
 
         jLabel9.setText("jLabel9");
 
@@ -84,17 +85,7 @@ public class Instructor extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel2.setText("Module List:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Course ID", "Course nam", "Teacher", "Module Name"
-            }
-        ));
+        jTable1.setModel(this.get_module());
         jScrollPane1.setViewportView(jTable1);
 
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
@@ -106,7 +97,7 @@ public class Instructor extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel4.setText("Student List:");
 
-        jTable3.setModel(this.get_students());
+        jTable3.setModel(this.fill_marks());
         jScrollPane3.setViewportView(jTable3);
 
         jLabel5.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
@@ -127,14 +118,14 @@ public class Instructor extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(242, 242, 242));
         jLabel7.setText("Marks");
 
-        // jTextField_marks.addActionListener(new java.awt.event.ActionListener() {
-        //     public void actionPerformed(java.awt.event.ActionEvent evt) {
-        //         jTextField_marksActionPerformed(evt);
-        //     }
-        // });
+        jTextField_marks.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel8.setForeground(new java.awt.Color(242, 242, 242));
-        jLabel8.setText("Module ID:");
+        jLabel8.setText("Module name:");
 
         jLabel10.setForeground(new java.awt.Color(242, 242, 242));
         jLabel10.setText("course name:");
@@ -188,7 +179,7 @@ public class Instructor extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(194, 194, 194)
                         .addComponent(jButton2)))
-                .addContainerGap(242, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,7 +188,7 @@ public class Instructor extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jTextField_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField_marks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
@@ -218,35 +209,46 @@ public class Instructor extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jButton_logout.setBackground(new java.awt.Color(153, 51, 0));
+        jButton_logout.setText("Logout");
+        jButton_logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_logoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(62, 62, 62)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(62, 62, 62)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(159, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton_logout)
+                .addGap(85, 85, 85))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jButton_logout))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -260,14 +262,13 @@ public class Instructor extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(78, Short.MAX_VALUE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
@@ -307,6 +308,15 @@ public class Instructor extends javax.swing.JFrame {
     private void jTextField_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_usernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_usernameActionPerformed
+
+    private void jButton_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_logoutActionPerformed
+        LoginForm rgf = new LoginForm();
+        rgf.setVisible(true);
+        rgf.pack();
+        rgf.setLocationRelativeTo(null);
+        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_jButton_logoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -370,11 +380,11 @@ public class Instructor extends javax.swing.JFrame {
         Connection con = MyConnection.getConnection();
         PreparedStatement ps;
         DefaultTableModel model = new DefaultTableModel(null,new String [] {
-                    "S.N", "Student Id", "Student Name","Email","Course","Age","Phone","Action"
+                    "S.N", "Student Id", "Name","Username", "Course","Phone","Email","Action"
                 });
        
         try{
-          ps = con.prepareStatement("SELECT * FROM `students`");
+          ps = con.prepareStatement("SELECT * FROM `register` where role='2'");
           ResultSet rs =ps.executeQuery();        
           Object[] row;
           int i =1;
@@ -383,11 +393,11 @@ public class Instructor extends javax.swing.JFrame {
                 row = new Object[8];
                 row[0] = i;
                 row[1] = rs.getInt(1);
-                row[2] = rs.getString(2);
-                row[3] = rs.getString(6);
-                row[4] = rs.getString(3);
-                row[5] = rs.getInt(4); //age
-                row[6] = rs.getString(5);
+                row[2] = rs.getString(4).concat(" ").concat(rs.getString(5));
+                row[3] = rs.getString(2);
+                row[4] = rs.getInt(9);
+                row[5] = rs.getInt(6);
+                row[6] = rs.getString(8);
                 model.addRow(row);
                 i++;
               }
@@ -397,6 +407,38 @@ public class Instructor extends javax.swing.JFrame {
 
         return model;
     }
+
+    public DefaultTableModel get_module() {
+        Connection con = MyConnection.getConnection();
+        PreparedStatement ps;   
+        DefaultTableModel model = new DefaultTableModel(null,new String [] {
+                    "S.N",  "course Name","module_name"
+                });
+       
+        try{
+          ps = con.prepareStatement("SELECT * FROM `module`");
+          ResultSet rs =ps.executeQuery();        
+          Object[] row;
+          int i =1;
+          while(rs.next())
+              {
+                row = new Object[8];
+                row[0] = i;
+                // row[1] = rs.getInt(1);
+                row[1] = rs.getString(2);
+                row[2] = rs.getString(3);
+                // row[4] = rs.getString(4);
+               
+                model.addRow(row);
+                i++;
+              }
+          } catch (SQLException ex) {
+                Logger.getLogger(course.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+        }
+
+        return model;
+    }
+
 
     public DefaultTableModel fill_marks(){
         Connection con = MyConnection.getConnection();
@@ -433,6 +475,7 @@ public class Instructor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton_logout;
     private javax.swing.JComboBox<String> jComboBox1_course;
     private javax.swing.JComboBox<String> jComboBox_status;
     private javax.swing.JLabel jLabel1;

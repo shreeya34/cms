@@ -1,6 +1,14 @@
 package javastdapp;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -39,17 +47,7 @@ public class Adminmodule extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel1.setText("Welcome To Module Management");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "S.N", "Modulename", "Courseid", "Action"
-            }
-        ));
+        jTable1.setModel(this.get_module());
         jScrollPane1.setViewportView(jTable1);
 
         jButton_addm.setBackground(new java.awt.Color(0, 102, 51));
@@ -133,6 +131,35 @@ public class Adminmodule extends javax.swing.JFrame {
             }
         });
     }
+
+    public DefaultTableModel get_module() {
+        Connection con = MyConnection.getConnection();
+        PreparedStatement ps;
+        DefaultTableModel model = new DefaultTableModel(null,new String [] {
+                    "S.N", "Name", "Course Name"
+                });
+       
+        try{
+          ps = con.prepareStatement("SELECT * FROM `module`");
+          ResultSet rs =ps.executeQuery();        
+          Object[] row;
+          int i =1;
+          while(rs.next())
+              {
+                row = new Object[8];
+                row[0] = i;
+                row[1] = rs.getString(2);
+                row[2] = rs.getString(3);
+                model.addRow(row);
+                i++;
+              }
+          } catch (SQLException ex) {
+                Logger.getLogger(course.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+        }
+
+        return model;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_addm;
