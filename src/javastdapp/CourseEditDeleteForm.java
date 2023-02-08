@@ -142,6 +142,12 @@ public class CourseEditDeleteForm extends javax.swing.JFrame {
             if (ps.executeUpdate() > 0) {
                 JOptionPane.showMessageDialog(null, "Course Deleted");
             }
+            Admincourse rgf = new Admincourse();
+            rgf.setVisible(true);
+            rgf.pack();
+            rgf.setLocationRelativeTo(null);
+            rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.dispose();
         } catch (SQLException ex) {
             Logger.getLogger(instructors.class.getName()).log(Level.SEVERE, null, ex);
         }
