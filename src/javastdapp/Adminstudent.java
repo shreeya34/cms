@@ -4,7 +4,15 @@
  */
 package javastdapp;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -38,17 +46,7 @@ public class Adminstudent extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel1.setText("Welcome To Student Management");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "S.N", "Name", "Phone number ", "Age", "Course", "Action"
-            }
-        ));
+        jTable1.setModel(this.fill_students());
         jScrollPane1.setViewportView(jTable1);
 
         jButton_adds.setBackground(new java.awt.Color(0, 102, 0));
@@ -132,6 +130,43 @@ public class Adminstudent extends javax.swing.JFrame {
             }
         });
     }
+
+
+    public DefaultTableModel fill_students(){
+        Connection con = MyConnection.getConnection();
+        PreparedStatement ps;
+        DefaultTableModel model = new DefaultTableModel(null,new String [] {
+                    "S.N", "Student Name", "Course","Age","Phone","Email","Action"
+                });
+        // jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        //     myData,
+        //     new String [] {
+        //         "S.N", "Course id", "Course name", "Action "
+        //     }
+        // ));
+        try{
+          ps = con.prepareStatement("SELECT * FROM `students`");
+          ResultSet rs =ps.executeQuery();        
+          Object[] row;
+          int i =1;
+          while(rs.next())
+              {
+                row = new Object[6];
+                row[0] = i;
+                row[1] = rs.getString(2);
+                row[2] = rs.getString(3);
+                row[3] = rs.getInt(4);
+                row[4] = rs.getInt(5);
+                row[5] = rs.getString(6);
+                model.addRow(row);
+                i++;
+              }
+          } catch (SQLException ex) {
+                Logger.getLogger(course.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+        }
+
+        return model;
+      }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_adds;

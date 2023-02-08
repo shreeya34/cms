@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
     
 public class marks {
-    public void insertUpdateDeletemodules(char operation, Integer student_id, String course_name, String module_name, Integer marks, String status)
+    public void insertUpdateDeletemarks(char operation, Integer student_id, String course_name, String module_name, Integer marks, String status)
            {
          
          Connection con = MyConnection.getConnection();
@@ -25,8 +25,8 @@ public class marks {
                {
                    ps = con.prepareStatement("INSERT INTO marks(student_id, course_name, module_name, marks, status) VALUES (?,?,?,?,?)");
                    ps.setInt(1,student_id);
-                   ps.setString(2, module_name);
-                   ps.setString(3, course_name);
+                   ps.setString(2, course_name);
+                   ps.setString(3, module_name);
                    ps.setInt(4, marks);
                    ps.setString(5, status);
                    
@@ -87,47 +87,47 @@ public class marks {
     
     }
       
-       public boolean ismodulesExist(String moduleName){
-          boolean isExist= false;
-          Connection con = MyConnection.getConnection();
-          PreparedStatement ps;
-         try{
-           ps = con.prepareStatement("SELECT * FROM `marks` WHERE `name` = ?");
-           ps.setString(1,module_name);
-           ResultSet rs =ps.executeQuery();        
+      //  public boolean ismodulesExist(String moduleName){
+      //     boolean isExist= false;
+      //     Connection con = MyConnection.getConnection();
+      //     PreparedStatement ps;
+      //    try{
+      //      ps = con.prepareStatement("SELECT * FROM `marks` WHERE `name` = ?");
+      //      ps.setString(1,module_name);
+      //      ResultSet rs =ps.executeQuery();        
          
-           if(rs.next())
-                {
-               isExist= true;
-                }
-            } catch (SQLException ex) {
-              Logger.getLogger(modules.class.getName()).log(Level.SEVERE, null, ex);
-          }
-           return isExist;
+      //      if(rs.next())
+      //           {
+      //          isExist= true;
+      //           }
+      //       } catch (SQLException ex) {
+      //         Logger.getLogger(modules.class.getName()).log(Level.SEVERE, null, ex);
+      //     }
+      //      return isExist;
        
-       }
+      //  }
        
-      public void Fill_module_Table(JTable table){
-        Connection con = MyConnection.getConnection();
-          PreparedStatement ps;
-        try{
-          ps = con.prepareStatement("SELECT * FROM `marks`");
-          ResultSet rs =ps.executeQuery();        
-          DefaultTableModel model =(DefaultTableModel) table.getModel();
-          Object[] row;
-          while(rs.next())
-              {
-                row = new Object[3];
-                row[0] = rs.getInt(1);
-                row[1] = rs.getString(2);
-                row[2] = rs.getInt(3);
+      // public void Fill_module_Table(JTable table){
+      //   Connection con = MyConnection.getConnection();
+      //     PreparedStatement ps;
+      //   try{
+      //     ps = con.prepareStatement("SELECT * FROM `marks`");
+      //     ResultSet rs =ps.executeQuery();        
+      //     DefaultTableModel model =(DefaultTableModel) table.getModel();
+      //     Object[] row;
+      //     while(rs.next())
+      //         {
+      //           row = new Object[3];
+      //           row[0] = rs.getInt(1);
+      //           row[1] = rs.getString(2);
+      //           row[2] = rs.getInt(3);
                 
-                model.addRow(row);
-              }
-          } catch (SQLException ex) {
-            Logger.getLogger(course.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
-        }
-      }
+      //           model.addRow(row);
+      //         }
+      //     } catch (SQLException ex) {
+      //       Logger.getLogger(course.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+      //   }
+      // }
         
       public int getCourseId(String module_name)
       {

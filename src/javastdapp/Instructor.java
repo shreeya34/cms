@@ -1,5 +1,16 @@
 package javastdapp;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -14,6 +25,8 @@ public class Instructor extends javax.swing.JFrame {
     /**
      * Creates new form Instructor
      */
+    
+    marks crs = new marks();
     public Instructor() {
         initComponents();
     }
@@ -28,6 +41,7 @@ public class Instructor extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel9 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -41,14 +55,26 @@ public class Instructor extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextField_username = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTextField_marks = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jTextField_module = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jComboBox_status = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
+        jComboBox1_course = new javax.swing.JComboBox<>();
 
         jLabel9.setText("jLabel9");
+
+        jButton1.setBackground(new java.awt.Color(0, 102, 51));
+        jButton1.setText("ADD");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,33 +100,13 @@ public class Instructor extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel3.setText("Marks:");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Mark", "Module ID ", "Student ", "Status"
-            }
-        ));
+        jTable2.setModel(this.fill_marks());
         jScrollPane2.setViewportView(jTable2);
 
         jLabel4.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel4.setText("Student List:");
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Student ID", "Username", "Course ID", "Module ID"
-            }
-        ));
+        jTable3.setModel(this.get_students());
         jScrollPane3.setViewportView(jTable3);
 
         jLabel5.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
@@ -112,19 +118,40 @@ public class Instructor extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(242, 242, 242));
         jLabel6.setText("Student Username:");
 
+        jTextField_username.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_usernameActionPerformed(evt);
+            }
+        });
+
         jLabel7.setForeground(new java.awt.Color(242, 242, 242));
         jLabel7.setText("Marks");
+
+        // jTextField_marks.addActionListener(new java.awt.event.ActionListener() {
+        //     public void actionPerformed(java.awt.event.ActionEvent evt) {
+        //         jTextField_marksActionPerformed(evt);
+        //     }
+        // });
 
         jLabel8.setForeground(new java.awt.Color(242, 242, 242));
         jLabel8.setText("Module ID:");
 
-        jButton1.setBackground(new java.awt.Color(0, 102, 51));
-        jButton1.setText("ADD");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jLabel10.setForeground(new java.awt.Color(242, 242, 242));
+        jLabel10.setText("course name:");
+
+        jLabel11.setForeground(new java.awt.Color(242, 242, 242));
+        jLabel11.setText("Status");
+
+        jComboBox_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pass", "Fail", "Pending" }));
+
+        jButton2.setText("Add");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
+
+        jComboBox1_course.setModel(this.get_courses());
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -132,50 +159,63 @@ public class Instructor extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel7)
-                        .addGap(70, 70, 70))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(35, 35, 35)
-                                .addComponent(jLabel6))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(101, 101, 101)
-                                .addComponent(jLabel8)))
-                        .addGap(54, 54, 54)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextField1)
-                        .addComponent(jTextField2)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(35, 35, 35)
+                            .addComponent(jLabel6)
+                            .addGap(106, 106, 106)
+                            .addComponent(jTextField_username, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(43, 43, 43)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel7)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jTextField_marks, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel8)
+                                        .addComponent(jLabel10))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTextField_module, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jComboBox1_course, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(jButton1)))
-                .addContainerGap(90, Short.MAX_VALUE))
+                        .addGap(54, 54, 54)
+                        .addComponent(jLabel11)
+                        .addGap(185, 185, 185)
+                        .addComponent(jComboBox_status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(194, 194, 194)
+                        .addComponent(jButton2)))
+                .addContainerGap(242, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(33, 33, 33)
+                .addGap(19, 19, 19)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(jTextField_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField_marks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addGap(27, 27, 27)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(35, 35, 35))))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField_module, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jComboBox1_course, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jComboBox_status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addComponent(jButton2)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -226,8 +266,8 @@ public class Instructor extends javax.swing.JFrame {
                         .addGap(21, 21, 21)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
 
         pack();
@@ -236,6 +276,37 @@ public class Instructor extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Integer student_id = Integer.parseInt(jTextField_username.getText());
+        Integer marks = Integer.parseInt(jTextField_marks.getText());
+        String status = jComboBox_status.getSelectedItem().toString();
+        String module_name = String.valueOf(jTextField_module.getText().toString());
+        String course = jComboBox1_course.getSelectedItem().toString();
+
+        
+        crs.insertUpdateDeletemarks('i',student_id,course,module_name,marks,status);
+
+        try {
+            this.dispose();
+            Instructor ins = new Instructor();
+            ins.setVisible(true);
+            ins.pack();
+            ins.setLocationRelativeTo(null);
+            ins.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            // ins.dispose();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextField_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_usernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_usernameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -272,9 +343,101 @@ public class Instructor extends javax.swing.JFrame {
         });
     }
 
+    public DefaultComboBoxModel get_courses() {
+        Connection con = MyConnection.getConnection();
+        PreparedStatement ps;
+        // jComboBox_coursename.setModel(new javax.swing.DefaultComboBoxModel<>(new
+        // String[] { "BIT", "BBA", "BIBM" }));
+        // jComboBox_cname.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]
+        // { "BIT", "BBA", "BIBM", " bsc CS IT" }));
+
+        DefaultComboBoxModel courses = new javax.swing.DefaultComboBoxModel<>(new String[] {});
+        try {
+            ps = con.prepareStatement("SELECT name FROM `course`");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                String course_name = rs.getString(1);
+                courses.addElement(course_name);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(course.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return courses;
+    }
+
+    public DefaultTableModel get_students() {
+        Connection con = MyConnection.getConnection();
+        PreparedStatement ps;
+        DefaultTableModel model = new DefaultTableModel(null,new String [] {
+                    "S.N", "Student Id", "Student Name","Email","Course","Age","Phone","Action"
+                });
+       
+        try{
+          ps = con.prepareStatement("SELECT * FROM `students`");
+          ResultSet rs =ps.executeQuery();        
+          Object[] row;
+          int i =1;
+          while(rs.next())
+              {
+                row = new Object[8];
+                row[0] = i;
+                row[1] = rs.getInt(1);
+                row[2] = rs.getString(2);
+                row[3] = rs.getString(6);
+                row[4] = rs.getString(3);
+                row[5] = rs.getInt(4); //age
+                row[6] = rs.getString(5);
+                model.addRow(row);
+                i++;
+              }
+          } catch (SQLException ex) {
+                Logger.getLogger(course.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+        }
+
+        return model;
+    }
+
+    public DefaultTableModel fill_marks(){
+        Connection con = MyConnection.getConnection();
+        PreparedStatement ps;
+        DefaultTableModel model = new DefaultTableModel(null,new String [] {
+                    "S.N", "Student Name", "Marks","Email","Course","Module","Status","Action"
+                });
+       
+        try{
+          ps = con.prepareStatement("SELECT * FROM `marks` INNER JOIN students ON marks.student_id=students.id");
+          ResultSet rs =ps.executeQuery();        
+          Object[] row;
+          int i =1;
+          while(rs.next())
+              {
+                row = new Object[7];
+                row[0] = i;
+                row[1] = rs.getString(8);
+                row[2] = rs.getInt(5);
+                row[3] = rs.getString(12);
+                row[4] = rs.getString(3);
+                row[5] = rs.getString(4);
+                row[6] = rs.getString(6);
+                model.addRow(row);
+                i++;
+              }
+          } catch (SQLException ex) {
+                Logger.getLogger(course.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+        }
+
+        return model;
+      }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1_course;
+    private javax.swing.JComboBox<String> jComboBox_status;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -290,8 +453,8 @@ public class Instructor extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField_marks;
+    private javax.swing.JTextField jTextField_module;
+    private javax.swing.JTextField jTextField_username;
     // End of variables declaration//GEN-END:variables
 }

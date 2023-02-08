@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -12,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class student {
     public void insertUpdateDeletestudent(char operation, Integer id, String name, String course_name,
-            String phonenumber, String age){
+            String phonenumber, String age, String email){
          
          Connection con = MyConnection.getConnection();
             PreparedStatement ps;
@@ -20,11 +22,12 @@ public class student {
         { 
             try 
                {
-                   ps = con.prepareStatement("INSERT INTO students(`id`, `name`, `course_name`, `age`, `phonenumber`) VALUES (?,?,?,?,?)");
+                   ps = con.prepareStatement("INSERT INTO students(`name`, `course_name`, `age`, `phonenumber`,`email`) VALUES (?,?,?,?,?)");
                    ps.setString(1, name);
-                   ps.setString(4,course_name);
+                   ps.setString(2,course_name);
                    ps.setString(3,age);
-                   ps.setString(2, phonenumber);
+                   ps.setString(4, phonenumber);
+                   ps.setString(5,email);
                    
                    
                    
@@ -87,13 +90,13 @@ public class student {
     
     }
       
-       public boolean isstudentExist(String studentName){
+       public boolean isstudentExist(String email){
           boolean isExist= false;
           Connection con = MyConnection.getConnection();
           PreparedStatement ps;
          try{
-           ps = con.prepareStatement("SELECT * FROM `students` WHERE `name` = ?");
-           ps.setString(1, studentName);
+           ps = con.prepareStatement("SELECT * FROM `students` WHERE `email` = ?");
+           ps.setString(1, email);
            ResultSet rs =ps.executeQuery();        
          
            if(rs.next())
@@ -150,5 +153,4 @@ public class student {
           return studentid;
       
       }
-    
 }

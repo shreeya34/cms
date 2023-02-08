@@ -38,8 +38,6 @@ public class addStudent extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField_id = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jTextField_name = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -50,13 +48,13 @@ public class addStudent extends javax.swing.JFrame {
         jTextField_age = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jTextField_phone = new javax.swing.JTextField();
+        jLabel7_email = new javax.swing.JLabel();
+        jTextField_email = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel1.setText("Add Student");
-
-        jLabel2.setText("id:");
 
         jLabel3.setText("Name:");
 
@@ -80,11 +78,13 @@ public class addStudent extends javax.swing.JFrame {
             }
         });
 
-        jComboBox_course.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BIT", "BBA", "BIBM" }));
+        jComboBox_course.setModel(this.get_courses());
 
         jLabel5.setText("Age:");
 
         jLabel6.setText("Phone number:");
+
+        jLabel7_email.setText("Email");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,27 +95,31 @@ public class addStudent extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(152, 152, 152)
                         .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(46, 46, 46)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField_id)
+                            .addComponent(jTextField_email, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
                             .addComponent(jTextField_name)
                             .addComponent(jComboBox_course, 0, 168, Short.MAX_VALUE)
                             .addComponent(jTextField_age)
                             .addComponent(jTextField_phone))))
                 .addGap(57, 57, 57))
             .addGroup(layout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addComponent(jButton_addS)
-                .addGap(59, 59, 59)
-                .addComponent(jButton_addC)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addComponent(jButton_addS)
+                        .addGap(59, 59, 59)
+                        .addComponent(jButton_addC))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(jLabel7_email)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -123,11 +127,7 @@ public class addStudent extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1)
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextField_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -143,7 +143,11 @@ public class addStudent extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jTextField_phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7_email)
+                    .addComponent(jTextField_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_addS)
                     .addComponent(jButton_addC))
@@ -154,14 +158,15 @@ public class addStudent extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_addSActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        if(!crs.isstudentExist(jTextField_id.getText())){
+        if(!crs.isstudentExist(jTextField_email.getText())){
             String name =  jTextField_name.getText();
             String course_name = jComboBox_course.getSelectedItem().toString();
             String age = jTextField_age.getText().toString();
             String phonenumber = jTextField_phone.getText().toString();
+            String email = jTextField_email.getText();
             
             // int hours = Integer.valueOf(jSpinner_courseHours.getValue().toString());
-            crs.insertUpdateDeletestudent('i', null,name, course_name, phonenumber, age);
+            crs.insertUpdateDeletestudent('i', null,name, course_name, phonenumber, age,email);
         try{
             Adminstudent rgf = new Adminstudent();
             rgf.setVisible(true);
@@ -246,13 +251,13 @@ public class addStudent extends javax.swing.JFrame {
     private javax.swing.JButton jButton_addS;
     private javax.swing.JComboBox<String> jComboBox_course;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7_email;
     private javax.swing.JTextField jTextField_age;
-    private javax.swing.JTextField jTextField_id;
+    private javax.swing.JTextField jTextField_email;
     private javax.swing.JTextField jTextField_name;
     private javax.swing.JTextField jTextField_phone;
     // End of variables declaration//GEN-END:variables
